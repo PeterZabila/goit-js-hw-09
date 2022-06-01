@@ -15,14 +15,15 @@ flatpickr("input#datetime-picker", {enableTime: true,
     refs.input.addEventListener('input', inputHandler)
 
 function inputHandler(e) {
-    
-    const inputValue = e.target.value;
+
+        const inputValue = e.target.value;
   
     if(inputValue) {
         console.log(inputValue);
+        const currentTime = new Date();
+        console.log(currentTime);
         const time = new Date(inputValue);
         console.log(time.getTime());
         console.log(time);
     }
-    
 };
