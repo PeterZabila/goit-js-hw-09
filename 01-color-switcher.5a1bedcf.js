@@ -1,2 +1,0 @@
-var refs={start:document.querySelector("button[data-start]"),stop:document.querySelector("button[data-stop]"),body:document.querySelector("body")};function getRandomHexColor(){return"#".concat(Math.floor(16777215*Math.random()).toString(16))}function changeTheme(){setInterval((function(){refs.body.style.backgroundColor=getRandomHexColor()}),1e3)}refs.start.addEventListener("click",changeTheme);
-//# sourceMappingURL=01-color-switcher.5a1bedcf.js.map
