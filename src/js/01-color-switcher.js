@@ -4,8 +4,10 @@ const refs = {
     body: document.querySelector('body'),
 };
 
+let randomId = null;
 
 refs.start.addEventListener('click', changeTheme);
+refs.stop.addEventListener('click', onStopHandle);
 
 
 function getRandomHexColor() {
@@ -14,5 +16,11 @@ function getRandomHexColor() {
 
 function changeTheme() {
 
-    setInterval(() => { refs.body.style.backgroundColor = getRandomHexColor() }, 1000)  
+    randomId = setInterval(() => { refs.body.style.backgroundColor = getRandomHexColor() }, 1000);
+    refs.start.disabled = true;
+};
+
+function onStopHandle() {
+    clearInterval(randomId);
+    refs.start.disabled = false;
 };
