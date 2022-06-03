@@ -1,6 +1,7 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
+
 const refs =  {
     input: document.querySelector("input#datetime-picker"),
     startBtn: document.querySelector("button[data-start]"),
@@ -10,7 +11,7 @@ const refs =  {
     spanSecond: document.querySelector('span[data-seconds]'),
 };
 
-let targetDate = null;
+refs.startBtn.disabled = true;
 
 flatpickr("input#datetime-picker", {
         enableTime: true,
@@ -29,10 +30,6 @@ flatpickr("input#datetime-picker", {
     }
   );
 
-const inputData = new Date(refs.input.value);
-
-//   console.log((inputData).getTime());
-
 function convertMs(ms) {
     // Number of milliseconds per unit of time
     const second = 1000;
@@ -49,44 +46,37 @@ function convertMs(ms) {
   }
 
 function renderTime() {
-    const currentTime = new Date();
-    const currentTimetoMil = currentTime.getTime();
-    const timeLeft = currentTimetoMil - ((inputData).getTime());
-    console.log(timeLeft);
 
-    const time = convertMs(timeLeft);
-    // console.log(time);
-    const { days, hours, minutes, seconds } = time;
-       
-        refs.spanDay.textContent = days;
-        refs.spanHour.textContent = hours;
-        refs.spanMinute.textContent = minutes;
-        refs.spanSecond.textContent = seconds;
+   const timer = setInterval(() => {
+        const inputData = new Date(refs.input.value);
+        const currentTime = Date.now();
+            const timeLeft = ((inputData).getTime()) - currentTime;
+
+        const time = convertMs(timeLeft);
+     
+        const { days, hours, minutes, seconds } = time;
+        refs.spanDay.textContent = addLeadingZero(days);
+        refs.spanHour.textContent = addLeadingZero(hours);
+        refs.spanMinute.textContent = addLeadingZero(minutes);
+        refs.spanSecond.textContent = addLeadingZero(seconds);
+
+        if(Date.now() >= new Date(refs.input.value)) {
+            clearInterval(timer);
+            refs.startBtn.disabled = false;
+            refs.spanDay.textContent = '00';
+             refs.spanHour.textContent = '00';
+             refs.spanMinute.textContent = '00';
+             refs.spanSecond.textContent = '00';
+         }
+
+    }, 1000);  
+    refs.startBtn.disabled = true;    
+
+    
 };
 
+function addLeadingZero(value) {
+    return String(value).padStart(2, '0');
+}
+
 refs.startBtn.addEventListener('click', renderTime);
-
-  
-//   console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-//   console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-//   console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
-
-
-//     refs.startBtn.addEventListener('click', inputHandler);
-//     // refs.input.addEventListener('input', inputHandler)
-
-// function inputHandler() {
-//         const inputValue = refs.input.value;
-  
-//     if(inputValue) {
-
-//         targetDate = inputValue;
-//         toMilisec = targetDate.getTime();
-//         console.log(toMilisec);
-//         // const currentTime = new Date();
-//         //     // console.log(currentTime);
-//         // const time = new Date(inputValue);
-//             // console.log(time.getTime());
-//             // console.log(time);
-//     }
-// };

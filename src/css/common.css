@@ -10,9 +10,40 @@ body {
   background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
+  padding: 15px;
+}
+.input-wrapper {
+  width: 320px;
+  height: 100%;
+  display: flex;
 }
 
 img {
   display: block;
   max-width: 100%;
+}
+
+.form-control {
+  width: 250px;
+}
+
+.btn {
+  margin-left: 10px;
+}
+
+.timer-wrapper {
+  padding: 10px;
+}
+
+.timer {
+  display: flex;
+  cursor: none;
+}
+
+.field:not(:last-child) {
+  margin-right: 5px;
+}
+span.value {
+  font-weight: bold;
+  color: gray;
 }
