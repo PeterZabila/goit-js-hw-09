@@ -13,22 +13,24 @@ const refs =  {
 
 refs.startBtn.disabled = true;
 
-flatpickr("input#datetime-picker", {
-        enableTime: true,
-        time_24hr: true,
-        defaultDate: new Date(),
-        minuteIncrement: 1,
-        onClose(selectedDates) {
-            if(selectedDates && selectedDates[0] > new Date()) {
-                refs.startBtn.disabled = false;
-                targetDate = (selectedDates[0]);
-                // console.log((targetDate).getTime());
-            } else {
-                alert("Please choose a date in the future");
-            }
-        },
-    }
-  );
+const options = {
+    enableTime: true,
+    time_24hr: true,
+    defaultDate: new Date(),
+    minuteIncrement: 1,
+    onClose(selectedDates) {
+        if(selectedDates && selectedDates[0] > new Date()) {
+            refs.startBtn.disabled = false;
+            targetDate = (selectedDates[0]);
+            // console.log((targetDate).getTime());
+        } else {
+            alert("Please choose a date in the future");
+        }
+    },
+};
+
+
+flatpickr("input#datetime-picker", options);
 
 function convertMs(ms) {
     // Number of milliseconds per unit of time
