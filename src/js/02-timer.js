@@ -21,7 +21,7 @@ const options = {
     onClose(selectedDates) {
         if(selectedDates && selectedDates[0] > new Date()) {
             refs.startBtn.disabled = false;
-            targetDate = (selectedDates[0]);
+            // targetDate = (selectedDates[0]);
             // console.log((targetDate).getTime());
         } else {
             alert("Please choose a date in the future");
